@@ -27,16 +27,16 @@ export default function ServicesSection() {
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-80 h-45 opacity-60">
         <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
       </div>
-      <div className="absolute bottom-20 right-0 w-60 h-34 opacity-60">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
+      <div className="absolute -bottom-12 right-0 w-60 h-60 opacity-100">
+        <img src="/assets/service_pattern2.svg" alt="Service Pattern 2" className="w-full h-full object-contain" />
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
         {/* Section Header */}
         <div className="mb-16">
           <div className="flex items-center space-x-3 mb-6">
-            <img src="/assets/service_logo.svg" alt="Service Logo" className="w-12 h-12" />
-            <h2 className="text-2xl md:text-3xl font-bold text-[#464646]">Our Services</h2>
+            <img src="/assets/service_logo.svg" alt="Service Logo" className="w-8 h-8" />
+            <h2 className="text-lg md:text-xl font-bold text-[#464646]">Our Services</h2>
           </div>
           
           <div className="flex justify-between items-end">

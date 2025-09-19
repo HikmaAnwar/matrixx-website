@@ -83,8 +83,8 @@ export default function MobileAppSection() {
             <div className="bg-white rounded-lg p-8 shadow-2xl" style={{ width: '700px' }}>
               {/* Header */}
               <div className="flex items-center space-x-4 mb-6">
-                <img src="/assets/service_logo.svg" alt="Our Product Logo" className="w-16 h-16" />
-                <h2 className="text-3xl md:text-4xl font-bold text-[#464646]">Our Product</h2>
+                <img src="/assets/service_logo.svg" alt="Our Product Logo" className="w-8 h-8" />
+                <h2 className="text-lg md:text-xl font-bold text-[#464646]">Our Product</h2>
               </div>
               
               {/* Main Heading */}

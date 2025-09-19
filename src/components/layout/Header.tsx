@@ -7,10 +7,8 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 mt-4">
-      <div className="bg-gray-100/80 backdrop-blur-md border border-gray-200 rounded-full shadow-lg px-8 mx-32">
-        {/* Blur overlay for content above navbar */}
-        <div className="absolute -top-4 left-0 right-0 h-4 bg-gradient-to-b from-gray-100/80 to-transparent backdrop-blur-sm"></div>
+    <header className="fixed top-6 left-0 right-0 z-50">
+      <div className="bg-[#F3F3F3] border border-gray-200 rounded-full shadow-sm px-8 mx-32">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">

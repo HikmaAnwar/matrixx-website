@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #F3F3F3;
+  --foreground: #777777;
+  --primary: #00ABB1;
+  --secondary: #0B3A93;
+  --tertiary: #B8B8B8;
+  --quaternary: #777777;
+  --quinary: #F3F3F3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-quaternary: var(--quaternary);
+  --color-quinary: var(--quinary);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-script: 'Dancing Script', cursive;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.abstract-bg {
+  background-image: radial-gradient(circle at 20% 80%, rgba(0, 171, 177, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(11, 58, 147, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 40%, rgba(0, 171, 177, 0.05) 0%, transparent 50%);
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+@keyframes slow-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-slow-bounce {
+  animation: slow-bounce 3s ease-in-out infinite;
+}

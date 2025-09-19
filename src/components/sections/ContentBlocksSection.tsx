@@ -10,35 +10,7 @@ export default function ContentBlocksSection() {
   return (
     <section className="py-20 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center space-x-3 mb-6">
-            <h2 className="text-lg md:text-xl font-bold text-[#464646]">Our Story</h2>
-            <div className="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center">
-              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-              </svg>
-            </div>
-          </div>
-          
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Discover our journey of innovation and the stories that shape our commitment to excellence.
-          </p>
-        </div>
 
-        {/* Innovation Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#464646] leading-tight">
-            Innovation that{' '}
-            <span className="font-script gradient-text text-5xl md:text-6xl">
-              defines trends
-            </span>{' '}
-            and designing{' '}
-            <span className="font-script gradient-text text-5xl md:text-6xl">
-              high-impact
-            </span>
-          </h2>
-        </div>
 
         {/* Content Blocks Grid */}
         <div className="space-y-8">

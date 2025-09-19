@@ -13,16 +13,10 @@ export default function MobileAppSection() {
       description2: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
     },
     {
-      phoneImage: '/assets/phone1.png', // You can add different phone images
+      phoneImage: '/assets/burger_phone.png',
       title: 'Advanced Technology Solutions for Modern Businesses',
       description: 'Our cutting-edge technology solutions help businesses stay ahead of the competition. We deliver innovative products that transform how companies operate and serve their customers.',
       description2: 'With our expert team and state-of-the-art development processes, we ensure every solution meets the highest standards of quality and performance.'
-    },
-    {
-      phoneImage: '/assets/phone1.png', // You can add different phone images
-      title: 'Revolutionary Mobile Applications That Drive Success',
-      description: 'Experience the power of mobile-first design with our revolutionary applications. Built for performance, designed for user experience, and optimized for business growth.',
-      description2: 'Our mobile solutions combine beautiful design with powerful functionality, creating apps that users love and businesses rely on for their digital transformation.'
     }
   ];
 
@@ -34,7 +28,7 @@ export default function MobileAppSection() {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
   return (
-    <section className="py-20 relative overflow-hidden" style={{ backgroundColor: '#0B3A93' }}>
+    <section className="py-8 relative overflow-hidden" style={{ backgroundColor: '#0B3A93' }}>
       {/* Background Elements */}
       <div className="absolute top-20 left-20 w-32 h-32 opacity-20">
         <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
@@ -46,7 +40,7 @@ export default function MobileAppSection() {
         <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-2 sm:px-4 lg:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Mobile App Mockup */}
           <div className="relative -ml-16">
@@ -72,15 +66,19 @@ export default function MobileAppSection() {
               <img 
                 src={slides[currentSlide].phoneImage} 
                 alt="Mobile App Mockup" 
-                className="mx-auto object-contain transition-all duration-500"
-                style={{ width: '280px', height: 'auto' }}
+                className="mx-auto object-contain"
+                style={{ width: '280px', height: '500px' }}
+                onError={(e) => {
+                  console.log('Image failed to load:', slides[currentSlide].phoneImage);
+                  e.currentTarget.src = '/assets/phone1.png'; // Fallback
+                }}
               />
             </div>
           </div>
 
           {/* Content Card */}
           <div className="relative">
-            <div className="bg-white rounded-lg p-8 shadow-2xl" style={{ width: '700px' }}>
+            <div className="bg-white rounded-lg p-8 shadow-md ml-0 mr-36" style={{ width: '100%', maxWidth: 'none' }}>
               {/* Header */}
               <div className="flex items-center space-x-4 mb-6">
                 <img src="/assets/service_logo.svg" alt="Our Product Logo" className="w-8 h-8" />
@@ -88,8 +86,11 @@ export default function MobileAppSection() {
               </div>
               
               {/* Main Heading */}
-              <h3 className="text-3xl md:text-4xl font-bold text-[#464646] mb-8 leading-tight transition-all duration-500">
-                {slides[currentSlide].title}
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#464646] mb-8 leading-tight transition-all duration-500">
+                Innovation that{' '}
+                <span className="font-script text-[#464646] text-4xl md:text-5xl lg:text-6xl">defines trends</span>{' '}
+                and designing{' '}
+                <span className="font-script text-[#464646] text-4xl md:text-5xl lg:text-6xl">high-impact</span>
               </h3>
               
               {/* Body Text */}

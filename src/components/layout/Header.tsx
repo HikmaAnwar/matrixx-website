@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 
 export default function Header() {
@@ -19,13 +20,13 @@ export default function Header() {
           <div className="flex items-center space-x-8">
             <nav className="hidden md:flex items-center space-x-8">
               {NAVIGATION_ITEMS.map((item) => (
-                <a
+                <Link
                   key={item.label}
                   href={item.href}
                   className="text-gray-700 hover:text-teal-600 transition-colors duration-200 font-medium"
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </nav>
 
@@ -54,14 +55,14 @@ export default function Header() {
           <div className="md:hidden absolute top-full left-0 right-0 mt-2">
             <div className="px-4 pt-4 pb-4 space-y-2 bg-white border border-gray-200 rounded-2xl shadow-lg mx-4">
               {NAVIGATION_ITEMS.map((item) => (
-                <a
+                <Link
                   key={item.label}
                   href={item.href}
                   className="block px-4 py-3 text-gray-700 hover:text-teal-600 hover:bg-gray-50 rounded-xl transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

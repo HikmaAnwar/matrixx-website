@@ -1,20 +1,22 @@
 'use client';
 
+import { SERVICES } from '@/lib/constants';
+
 export default function AboutServicesSection() {
-  const services = [
+  const serviceData = [
     {
-      id: '01',
-      title: 'Management Report',
+      id: '1',
+      title: 'Our Services ONE',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     },
     {
-      id: '360',
-      title: 'Enterprise Service',
+      id: '2', 
+      title: 'Our Services TWO',
       description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
     {
-      id: '24/7',
-      title: 'Customer Service',
+      id: '3',
+      title: 'Our Services Three', 
       description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
     }
   ];
@@ -22,52 +24,56 @@ export default function AboutServicesSection() {
   return (
     <section className="py-20 bg-white relative">
       {/* Background Elements */}
-      <div className="absolute top-10 right-10 w-32 h-32 opacity-60">
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-80 h-45 opacity-60">
         <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
       </div>
-      <div className="absolute top-20 right-20 w-24 h-24 opacity-40">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
+      <div className="absolute -bottom-12 right-0 w-60 h-60 opacity-100">
+        <img src="/assets/service_pattern2.svg" alt="Service Pattern 2" className="w-full h-full object-contain" />
       </div>
       
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
         {/* Services Grid */}
         <div className="grid md:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {serviceData.map((service) => (
             <div
               key={service.id}
-              className="bg-gray-100 rounded-2xl p-6 card-hover group h-80 flex flex-col"
+              className="bg-gray-100 rounded-2xl px-4 pt-4 pb-4 card-hover group h-56 flex flex-col"
             >
-              {/* Service Title */}
-              <div className="mb-4">
-                <h3 className="text-lg font-bold text-[#464646]">
-                  Our Services{' '}
-                  <span className="font-script text-[#00ABB1]">{service.id}</span>
-                </h3>
-              </div>
+              <div className="flex flex-1">
+                {/* Left Content */}
+                <div className="flex-1 flex flex-col relative">
+                  {/* Service Title */}
+                  <h3 className="text-lg font-bold text-[#464646] mb-3">
+                    Our Services{' '}
+                    <span className="font-script text-[#00ABB1]">
+                      {service.id === '1' ? 'ONE' : service.id === '2' ? 'TWO' : 'THREE'}
+                    </span>
+                  </h3>
 
-              {/* Service Image */}
-              <div className="flex-1 flex items-center justify-center mb-6">
-                <div className="w-32 h-32 bg-[#0B3A93] rounded-lg flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <div className="text-sm font-bold mb-2">{service.title}</div>
-                    <div className="text-xs opacity-80">Service Icon</div>
+                  {/* Description */}
+                  <p className="text-gray-600 mb-4 leading-relaxed text-sm">
+                    {service.description}
+                  </p>
+
+                  {/* View More Link - Fixed position */}
+                  <div className="absolute bottom-0 left-0 flex items-center space-x-3">
+                    <span className="text-gray-700 font-medium">View More</span>
+                    <img 
+                      src="/assets/Explore More.svg" 
+                      alt="Explore More" 
+                      className="w-8 h-8 hover:opacity-80 transition-opacity duration-200"
+                    />
                   </div>
                 </div>
-              </div>
 
-              {/* Description */}
-              <p className="text-gray-600 mb-4 leading-relaxed text-sm">
-                {service.description}
-              </p>
-
-              {/* View More Link */}
-              <div className="flex items-center space-x-3">
-                <span className="text-gray-700 font-medium">View More</span>
-                <button className="w-8 h-8 bg-[#00ABB1] rounded-lg flex items-center justify-center hover:bg-[#0B3A93] transition-colors duration-200">
-                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
+                {/* Right Image */}
+                <div className="ml-4 flex-shrink-0">
+                  <img 
+                    src={`/assets/service_img${service.id === '1' ? '' : service.id}.svg`}
+                    alt={`Service ${service.id}`}
+                    className="w-32 h-40 object-contain rounded-lg"
+                  />
+                </div>
               </div>
             </div>
           ))}

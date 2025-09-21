@@ -2,7 +2,7 @@
 
 export default function AboutHeroSection() {
   return (
-    <section className="pt-32 pb-20 bg-white relative">
+    <section className="pt-32 pb-20 bg-[#F3F3F3] relative">
       {/* Background Elements */}
       <div className="absolute top-20 left-10 w-32 h-32 opacity-60">
         <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
@@ -23,32 +23,15 @@ export default function AboutHeroSection() {
           </div>
           
           {/* Mixed font headline */}
-          <div className="mb-8">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#464646] leading-tight">
+          <div className="mb-8 text-center">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#464646] leading-tight">
               Innovation that{' '}
-              <span className="font-script text-[#00ABB1] text-5xl md:text-6xl lg:text-7xl italic">defines trends</span>{' '}
+              <span className="font-script text-[#00ABB1] text-4xl md:text-5xl lg:text-6xl italic">defines trends</span>{' '}
               and{' '}
-              <span className="font-script text-[#00ABB1] text-5xl md:text-6xl lg:text-7xl italic">designing high-impact</span>
+              <span className="font-script text-[#00ABB1] text-4xl md:text-5xl lg:text-6xl italic">designing high-impact</span>
             </h1>
           </div>
           
-          {/* Image placeholders */}
-          <div className="flex items-center justify-center gap-8 mb-8">
-            {/* Main large image */}
-            <div className="w-80 h-80 bg-gray-200 rounded-lg flex items-center justify-center">
-              <div className="text-gray-400 text-lg">Main Image Placeholder</div>
-            </div>
-            
-            {/* Two smaller images */}
-            <div className="flex flex-col gap-6">
-              <div className="w-48 h-36 bg-gray-200 rounded-lg flex items-center justify-center">
-                <div className="text-gray-400 text-sm">Image Placeholder</div>
-              </div>
-              <div className="w-48 h-36 bg-gray-200 rounded-lg flex items-center justify-center">
-                <div className="text-gray-400 text-sm">Image Placeholder</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

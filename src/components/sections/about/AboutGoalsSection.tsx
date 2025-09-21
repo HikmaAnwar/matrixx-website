@@ -14,7 +14,7 @@ export default function AboutGoalsSection() {
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
         {/* Section Header */}
         <div className="mb-16">
-          <div className="flex items-center justify-center space-x-3 mb-8">
+          <div className="flex items-center space-x-3 mb-8">
             <img src="/assets/service_logo.svg" alt="About Us Logo" className="w-8 h-8" />
             <h2 className="text-lg md:text-xl font-bold text-[#464646]">About Us</h2>
           </div>
@@ -30,6 +30,9 @@ export default function AboutGoalsSection() {
             </p>
           </div>
 
+          {/* Empty space */}
+          <div></div>
+
           {/* Our Mission */}
           <div className="space-y-6">
             <h3 className="text-3xl md:text-4xl font-bold text-[#464646]">Our Mission</h3>
@@ -39,7 +42,7 @@ export default function AboutGoalsSection() {
           </div>
 
           {/* Our Vision */}
-          <div className="space-y-6 md:col-span-2">
+          <div className="space-y-6">
             <h3 className="text-3xl md:text-4xl font-bold text-[#464646]">Our Vision</h3>
             <p className="text-lg text-gray-600 leading-relaxed">
               Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.

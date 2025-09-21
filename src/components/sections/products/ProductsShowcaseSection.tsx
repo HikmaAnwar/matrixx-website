@@ -23,35 +23,15 @@ export default function ProductsShowcaseSection() {
         <div className="flex items-center gap-12">
           {/* Mobile App Mockup */}
           <div className="flex-1 flex justify-center">
-            <div className="w-80 h-96 bg-black rounded-3xl p-4 shadow-2xl">
-              <div className="w-full h-full bg-white rounded-2xl overflow-hidden">
-                {/* Phone Screen Content - Form/Data Entry Interface */}
-                <div className="w-full h-full bg-gray-50 p-4">
-                  <div className="space-y-3">
-                    <div className="bg-blue-500 text-white p-2 rounded text-center text-sm font-bold">
-                      Data Entry Form
-                    </div>
-                    <div className="space-y-2">
-                      <div className="bg-white p-2 rounded shadow-sm">
-                        <div className="text-xs text-gray-600 mb-1">Name</div>
-                        <div className="h-6 bg-gray-200 rounded"></div>
-                      </div>
-                      <div className="bg-white p-2 rounded shadow-sm">
-                        <div className="text-xs text-gray-600 mb-1">Email</div>
-                        <div className="h-6 bg-gray-200 rounded"></div>
-                      </div>
-                      <div className="bg-white p-2 rounded shadow-sm">
-                        <div className="text-xs text-gray-600 mb-1">Phone</div>
-                        <div className="h-6 bg-gray-200 rounded"></div>
-                      </div>
-                    </div>
-                    <div className="bg-teal-500 text-white p-2 rounded text-center text-xs">
-                      Submit
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <img
+              src="/assets/burger_phone.png"
+              alt="Mobile App Mockup"
+              className="w-80 h-96 object-contain"
+              onError={(e) => {
+                console.log('Image failed to load: burger_phone.png');
+                e.currentTarget.src = '/assets/phone1.png'; // Fallback
+              }}
+            />
           </div>
 
           {/* Content Card */}

@@ -39,35 +39,28 @@ export default function ServicesContentBlocksSection() {
       </div>
       
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
-        {/* Section Header */}
-        <div className="mb-16">
-          <div className="flex items-center space-x-3 mb-8">
-            <img src="/assets/service_logo.svg" alt="Our Services Logo" className="w-8 h-8" />
-            <h2 className="text-lg md:text-xl font-bold text-[#464646]">Our Services</h2>
-          </div>
-        </div>
 
         {/* Content Blocks */}
         <div className="space-y-20">
           {contentBlocks.map((block) => (
             <div key={block.id} className={`flex items-center gap-12 ${block.imageLeft ? '' : 'flex-row-reverse'}`}>
               {/* Image */}
-              <div className="flex-1">
+              <div className="w-1/3">
                 <div className="w-full h-80 bg-gray-200 rounded-lg flex items-center justify-center">
                   <div className="text-gray-400 text-lg">Image Placeholder</div>
                 </div>
               </div>
               
               {/* Content */}
-              <div className="flex-1">
-                <h3 className="text-3xl md:text-4xl font-bold text-[#464646] mb-6">
+              <div className="w-2/3">
+                <h3 className="text-xl md:text-2xl font-bold text-[#464646] mb-6">
                   {block.title}
                 </h3>
                 <div className="space-y-4">
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-lg text-gray-600 leading-relaxed text-justify">
                     {block.content}
                   </p>
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-lg text-gray-600 leading-relaxed text-justify">
                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
                   </p>
                 </div>

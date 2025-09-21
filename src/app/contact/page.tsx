@@ -8,8 +8,8 @@ export default function ContactPage() {
     <div className="min-h-screen">
       <ContactHeroSection />
       <ContactFormSection />
-      <ContactInfoSection />
       <ContactMapSection />
+      {/* <ContactInfoSection /> */}
     </div>
   );
 }

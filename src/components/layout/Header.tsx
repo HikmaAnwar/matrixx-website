@@ -2,32 +2,41 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="fixed top-6 left-0 right-0 z-50">
       <div className="bg-[#F3F3F3] border border-gray-200 rounded-full shadow-sm px-8 mx-32">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center">
+          <Link href="/" className="flex items-center">
             <img src="/assets/logo.svg" alt="Logo" className="w-12 h-12" />
-          </div>
+          </Link>
 
           {/* Desktop Navigation - Aligned Right */}
           <div className="flex items-center space-x-8">
             <nav className="hidden md:flex items-center space-x-8">
-              {NAVIGATION_ITEMS.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="text-gray-700 hover:text-teal-600 transition-colors duration-200 font-medium"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {NAVIGATION_ITEMS.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`transition-colors duration-200 font-medium ${
+                      isActive 
+                        ? 'text-[#00ABB1] font-bold' 
+                        : 'text-gray-700 hover:text-[#00ABB1]'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Arrow Button */}
@@ -54,16 +63,23 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 mt-2">
             <div className="px-4 pt-4 pb-4 space-y-2 bg-white border border-gray-200 rounded-2xl shadow-lg mx-4">
-              {NAVIGATION_ITEMS.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="block px-4 py-3 text-gray-700 hover:text-teal-600 hover:bg-gray-50 rounded-xl transition-colors duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {NAVIGATION_ITEMS.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`block px-4 py-3 rounded-xl transition-colors duration-200 ${
+                      isActive 
+                        ? 'text-[#00ABB1] font-bold bg-[#00ABB1]/10' 
+                        : 'text-gray-700 hover:text-[#00ABB1] hover:bg-gray-50'
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}

@@ -9,7 +9,7 @@ export default function ContactPage() {
       <ContactHeroSection />
       <ContactFormSection />
       <ContactMapSection />
-      {/* <ContactInfoSection /> */}
+      
     </div>
   );
 }

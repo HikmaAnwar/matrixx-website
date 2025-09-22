@@ -53,11 +53,6 @@ export default function FAQSection() {
 
   return (
     <section className="pt-8 pb-20 bg-gray-100 relative">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-60 h-60 opacity-80">
-        <img src="/assets/about_pattern.svg" alt="About Pattern" className="w-full h-full object-contain" />
-      </div>
-      
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
         {/* Section Header */}
         <div className="mb-16">

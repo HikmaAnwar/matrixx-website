@@ -9,13 +9,13 @@ export default function Footer() {
           {/* Company Info & Social Media */}
           <div className="space-y-3">
             {/* Logo */}
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                <div className="w-5 h-5 bg-[#464646] rounded-full flex items-center justify-center">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
-              </div>
-              <div>
+            <div className="flex items-center space-x-1">
+              <img 
+                src="/assets/footer_logo.svg" 
+                alt="Matrix Technology Logo" 
+                className="w-8 h-8"
+              />
+              <div className="text-left">
                 <div className="text-lg font-bold text-white">MATRIX</div>
                 <div className="text-xs text-gray-300">TECHNOLOGY PLC</div>
               </div>
@@ -58,9 +58,9 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div className="space-y-2">
-            <h3 className="text-base font-bold text-white">Services</h3>
-            <ul className="space-y-1">
+          <div className="space-y-2 text-left">
+            <h3 className="text-base font-bold text-white pl-20">Services</h3>
+            <ul className="space-y-1 pl-20 mt-2">
               <li><a href="#" className="text-white hover:text-[#00ABB1] transition-colors text-sm">Development</a></li>
               <li><a href="#" className="text-white hover:text-[#00ABB1] transition-colors text-sm">Consulting</a></li>
               <li><a href="#" className="text-white hover:text-[#00ABB1] transition-colors text-sm">Support</a></li>
@@ -69,9 +69,9 @@ export default function Footer() {
           </div>
 
           {/* Products */}
-          <div className="space-y-2">
-            <h3 className="text-base font-bold text-white">Products</h3>
-            <ul className="space-y-1">
+          <div className="space-y-2 text-left">
+            <h3 className="text-base font-bold text-white pl-20">Products</h3>
+            <ul className="space-y-1 pl-20 mt-2">
               <li><a href="#" className="text-white hover:text-[#00ABB1] transition-colors text-sm">MPOS System</a></li>
               <li><a href="#" className="text-white hover:text-[#00ABB1] transition-colors text-sm">Tame APP</a></li>
               <li><a href="#" className="text-white hover:text-[#00ABB1] transition-colors text-sm">MGC APP</a></li>
@@ -80,9 +80,9 @@ export default function Footer() {
           </div>
 
           {/* Contact Information */}
-          <div className="space-y-2">
-            <h3 className="text-base font-bold text-white">Contact Informations</h3>
-            <div className="space-y-1 text-white text-sm">
+          <div className="space-y-2 text-left">
+            <h3 className="text-base font-bold text-white pl-20">Contact Informations</h3>
+            <div className="space-y-1 text-white text-sm pl-20 mt-2">
               <p>Address: Addis Ababa, Ethiopia</p>
               <p>+2519114455588</p>
               <p>info@matrix.et</p>

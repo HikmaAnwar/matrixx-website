@@ -15,7 +15,11 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <img src="/assets/logo.svg" alt="Logo" className="w-12 h-12" />
+            <img 
+              src={pathname === "/" ? "/assets/Active Logo.svg" : "/assets/logo.svg"} 
+              alt="Logo" 
+              className={pathname === "/" ? "w-32 h-32" : "w-12 h-12"} 
+            />
           </Link>
 
           {/* Desktop Navigation - Aligned Right */}

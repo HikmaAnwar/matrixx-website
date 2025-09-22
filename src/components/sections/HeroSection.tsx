@@ -46,7 +46,15 @@ export default function mHeroSection() {
             {/* Explore More Section */}
             <div className="flex items-center space-x-4 mt-2">
               <span className="text-gray-700 font-medium">Explore More</span>
-              <button className="w-10 h-10 bg-[#00ABB1] rounded-lg flex items-center justify-center hover:bg-[#0B3A93] transition-colors duration-200">
+              <button 
+                onClick={() => {
+                  const servicesSection = document.getElementById('services-section');
+                  if (servicesSection) {
+                    servicesSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="w-10 h-10 bg-[#00ABB1] rounded-lg flex items-center justify-center hover:bg-[#0B3A93] transition-colors duration-200"
+              >
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>

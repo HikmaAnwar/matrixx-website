@@ -4,10 +4,10 @@ export default function AboutUsSection() {
   return (
     <section className="pt-20 relative" style={{ backgroundColor: '#F3F3F3' }}>
       {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-60 h-60 opacity-80">
+      <div className="absolute top-0 -right-16 w-60 h-60 opacity-80">
         <img src="/assets/about_pattern2.svg" alt="About Pattern 2" className="w-full h-full object-contain" />
       </div>
-      <div className="absolute -bottom-28 left-1/2 transform -translate-x-1/2 w-60 h-60 opacity-80">
+      <div className="absolute -bottom-28 -right-16 w-60 h-60 opacity-80">
         <img src="/assets/about_pattern.svg" alt="About Pattern" className="w-full h-full object-contain" />
       </div>
       

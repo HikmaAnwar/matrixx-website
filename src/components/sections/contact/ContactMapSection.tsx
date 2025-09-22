@@ -2,7 +2,7 @@
 
 export default function ContactMapSection() {
   return (
-    <section className="pt-20 pb-8 relative w-full" style={{ backgroundColor: '#F3F3F3' }}>
+    <section className="pt-20 relative w-full" style={{ backgroundColor: '#F3F3F3' }}>
       <div className="relative z-10">
         {/* Map Container */}
         <div className="relative">

@@ -3,14 +3,6 @@
 export default function ServicesExploreSection() {
   return (
     <section className="py-20 relative" style={{ backgroundColor: '#F3F3F3' }}>
-      {/* Background Elements */}
-      <div className="absolute top-10 right-10 w-32 h-32 opacity-60">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      <div className="absolute top-20 right-20 w-24 h-24 opacity-40">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
         <div className="flex items-center gap-12">
           {/* Image */}

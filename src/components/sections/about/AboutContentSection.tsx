@@ -4,11 +4,8 @@ export default function AboutContentSection() {
   return (
     <section className="pt-0 pb-20 bg-white relative">
       {/* Background Elements */}
-      <div className="absolute bottom-10 right-10 w-32 h-32 opacity-60">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      <div className="absolute bottom-20 right-20 w-24 h-24 opacity-40">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
+      <div className="absolute bottom-0 -right-20 w-80 h-80 opacity-80">
+        <img src="/assets/about22_pattern.svg" alt="About Pattern 22" className="w-full h-full object-contain" />
       </div>
       
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">

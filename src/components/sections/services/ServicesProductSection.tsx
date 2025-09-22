@@ -1,19 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ServicesProductSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const slides = [
     {
-      phoneImage: '/assets/phone1.png',
+      phoneImage: '/assets/burger_phone.png',
       title: 'Innovation that defines trends and designing high-impact',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       description2: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
     },
     {
-      phoneImage: '/assets/burger_phone.png',
+      phoneImage: '/assets/first_phone.png',
       title: 'Advanced Technology Solutions for Modern Businesses',
       description: 'Our cutting-edge technology solutions help businesses stay ahead of the competition. We deliver innovative products that transform how companies operate and serve their customers.',
       description2: 'With our expert team and state-of-the-art development processes, we ensure every solution meets the highest standards of quality and performance.'
@@ -21,64 +22,65 @@ export default function ServicesProductSection() {
   ];
 
   const nextSlide = () => {
+    setIsAnimating(true);
     setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setTimeout(() => setIsAnimating(false), 700);
   };
 
   const prevSlide = () => {
+    setIsAnimating(true);
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setTimeout(() => setIsAnimating(false), 700);
   };
   return (
-    <section className="py-8 relative overflow-hidden" style={{ backgroundColor: '#F3F3F3' }}>
-      {/* Background Elements */}
-      <div className="absolute top-20 left-20 w-32 h-32 opacity-20">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      <div className="absolute bottom-20 right-20 w-24 h-24 opacity-20">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      <div className="absolute top-1/2 left-10 w-16 h-16 opacity-15">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
+    <>
+      <style jsx>{`
+        @keyframes slideInFromRight {
+          0% {
+            opacity: 0;
+            transform: translateX(50px) scale(0.9);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+          }
+        }
+        .animate-slideInFromRight {
+          animation: slideInFromRight 0.7s ease-in-out;
+        }
+      `}</style>
+      <section className="pt-32 pb-20 relative overflow-hidden" style={{ backgroundColor: '#F3F3F3' }}>
+      {/* Product Pattern - Left Bottom */}
+      <div className="absolute bottom-0 left-0 z-5">
+        <img 
+          src="/assets/product_pattern.svg" 
+          alt="Product Pattern" 
+          className="object-contain opacity-40"
+          style={{ width: '300px', height: '300px' }}
+        />
       </div>
       
-      <div className="w-full px-2 sm:px-4 lg:px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
+        <div className="flex items-center gap-20">
           {/* Mobile App Mockup */}
-          <div className="relative -ml-16">
-            {/* Ellipse Pattern Background */}
-            <div className="absolute inset-0 flex items-center justify-center z-0">
-              <img 
-                src="/assets/Ellipse 14.svg" 
-                alt="Ellipse Pattern" 
-                className="w-3/4 h-3/4 object-contain opacity-30"
-              />
-            </div>
-            {/* Product Pattern - Bottom Corner */}
-            <div className="absolute bottom-0 left-0 z-5">
-              <img 
-                src="/assets/product_pattern.svg" 
-                alt="Product Pattern" 
-                className="object-contain opacity-40"
-                style={{ width: '120px', height: '120px' }}
-              />
-            </div>
+          <div className="w-2/5 flex justify-center relative">
             {/* Phone Image */}
             <div className="relative z-10">
               <img 
                 src={slides[currentSlide].phoneImage} 
                 alt="Mobile App Mockup" 
-                className="mx-auto object-contain"
-                style={{ width: '280px', height: '500px' }}
+                className={`w-[450px] h-[600px] object-contain transition-all duration-700 ease-in-out transform hover:scale-105 ${isAnimating ? 'animate-slideInFromRight' : ''}`}
                 onError={(e) => {
                   console.log('Image failed to load:', slides[currentSlide].phoneImage);
-                  e.currentTarget.src = '/assets/phone1.png'; // Fallback
+                  e.currentTarget.src = '/assets/first_phone.png'; // Fallback
                 }}
               />
             </div>
           </div>
 
           {/* Content Card */}
-          <div className="relative">
-            <div className="bg-white rounded-lg p-8 shadow-md ml-0 mr-36" style={{ width: '100%', maxWidth: 'none' }}>
+          <div className="w-3/5">
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
               {/* Header */}
               <div className="flex items-center space-x-4 mb-6">
                 <img src="/assets/service_logo.svg" alt="Our Product Logo" className="w-8 h-8" />
@@ -86,15 +88,17 @@ export default function ServicesProductSection() {
               </div>
               
               {/* Main Heading */}
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#464646] mb-8 leading-tight transition-all duration-500">
-                Innovation that{' '}
-                <span className="font-script text-[#464646] text-4xl md:text-5xl lg:text-6xl">defines trends</span>{' '}
-                and designing{' '}
-                <span className="font-script text-[#464646] text-4xl md:text-5xl lg:text-6xl">high-impact</span>
-              </h3>
+              <div className="mb-6">
+                <h3 className="text-3xl md:text-4xl font-bold text-[#464646] leading-tight">
+                  Innovation that{' '}
+                  <span className="font-script text-[#00ABB1] text-4xl md:text-5xl italic">defines trends</span>{' '}
+                  and{' '}
+                  <span className="font-script text-[#00ABB1] text-4xl md:text-5xl italic">designing high-impact</span>
+                </h3>
+              </div>
               
               {/* Body Text */}
-              <div className="space-y-4 mb-8">
+              <div className="space-y-4 mb-8 h-48 overflow-hidden">
                 <p className="text-gray-600 leading-relaxed text-lg transition-all duration-500">
                   {slides[currentSlide].description}
                 </p>
@@ -137,5 +141,6 @@ export default function ServicesProductSection() {
         </div>
       </div>
     </section>
+    </>
   );
 }

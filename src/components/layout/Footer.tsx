@@ -102,7 +102,7 @@ export default function Footer() {
 
       {/* Bottom Copyright Section */}
       <div className="bg-[#F3F3F3] text-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center pt-0.5 pb-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center py-1">
           <p className="text-xs text-[#00ABB1] font-bold">
             Copyright © 2025 MPOS | Powered by Matrix Technologies
           </p>

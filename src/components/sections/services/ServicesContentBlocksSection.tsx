@@ -30,12 +30,12 @@ export default function ServicesContentBlocksSection() {
 
   return (
     <section className="py-20 bg-white relative">
-      {/* Background Elements */}
-      <div className="absolute top-10 right-10 w-32 h-32 opacity-60">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
+      {/* Background Patterns */}
+      <div className="absolute top-10 -right-20 w-80 h-80 opacity-80">
+        <img src="/assets/service2_pattern.svg" alt="Service Pattern 2" className="w-full h-full object-contain" />
       </div>
-      <div className="absolute top-20 right-20 w-24 h-24 opacity-40">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
+      <div className="absolute bottom-10 -left-20 w-80 h-80 opacity-80">
+        <img src="/assets/service2_pattern.svg" alt="Service Pattern 2" className="w-full h-full object-contain" />
       </div>
       
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">

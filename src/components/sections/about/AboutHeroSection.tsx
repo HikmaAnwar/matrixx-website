@@ -3,17 +3,6 @@
 export default function AboutHeroSection() {
   return (
     <section className="pt-32 pb-20 bg-[#F3F3F3] relative">
-      {/* Background Elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 opacity-60">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      <div className="absolute top-40 left-20 w-24 h-24 opacity-40">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      <div className="absolute top-60 left-5 w-20 h-20 opacity-30">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
         {/* Section Header */}
         <div className="mb-16">

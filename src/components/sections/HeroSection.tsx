@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { HERO_CONTENT } from '@/lib/constants';
 
 export default function mHeroSection() {
@@ -22,7 +23,12 @@ export default function mHeroSection() {
           <div className="space-y-8">
             {/* Main Heading */}
             <div className="space-y-6">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#464646] leading-tight">
+              <motion.h1 
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#464646] leading-tight"
+              >
                 Innovation that{' '}
                 <span className="font-script text-[#00ABB1] text-4xl md:text-5xl lg:text-6xl">
                   defines trends
@@ -31,20 +37,35 @@ export default function mHeroSection() {
                 <span className="font-script text-[#00ABB1] text-4xl md:text-5xl lg:text-6xl">
                   high-impact
                 </span>
-              </h1>
+              </motion.h1>
               
-              <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
+              <motion.p 
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                className="text-lg text-gray-600 leading-relaxed max-w-2xl"
+              >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
+              </motion.p>
             </div>
 
             {/* Note */}
-            <p className="text-gray-600 text-base leading-relaxed max-w-md text-left mt-16 mb-0">
+            <motion.p 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+              className="text-gray-600 text-base leading-relaxed max-w-md text-left mt-16 mb-0"
+            >
               Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
+            </motion.p>
 
             {/* Explore More Section */}
-            <div className="flex items-center space-x-4 mt-2">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+              className="flex items-center space-x-4 mt-2"
+            >
               <span className="text-gray-700 font-medium">Explore More</span>
               <button 
                 onClick={() => {
@@ -59,7 +80,7 @@ export default function mHeroSection() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-            </div>
+            </motion.div>
 
             {/* Abstract Circles */}
             <div className="relative">

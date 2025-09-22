@@ -1,9 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function ProductsContentSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [visibleElements, setVisibleElements] = useState({
+    block1: false,
+    block2: false,
+    block3: false
+  });
+
+  const block1Ref = useRef(null);
+  const block2Ref = useRef(null);
+  const block3Ref = useRef(null);
 
   const slides = [
     {
@@ -34,33 +43,102 @@ export default function ProductsContentSection() {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const targetId = entry.target.getAttribute('data-block');
+            setVisibleElements(prev => ({
+              ...prev,
+              [targetId]: true
+            }));
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (block1Ref.current) observer.observe(block1Ref.current);
+    if (block2Ref.current) observer.observe(block2Ref.current);
+    if (block3Ref.current) observer.observe(block3Ref.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-20 relative" style={{ backgroundColor: '#F3F3F3' }}>
-      {/* Background Elements */}
-      <div className="absolute top-10 right-10 w-32 h-32 opacity-60">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      <div className="absolute top-20 right-20 w-24 h-24 opacity-40">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      <div className="absolute bottom-10 left-10 w-32 h-32 opacity-60">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
-      </div>
-      <div className="absolute bottom-20 left-20 w-24 h-24 opacity-40">
-        <img src="/assets/bubble.svg" alt="Bubble Pattern" className="w-full h-full object-contain" />
+    <>
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        @keyframes slideInFromLeft {
+          0% {
+            opacity: 0;
+            transform: translateX(-100px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        @keyframes slideInFromRight {
+          0% {
+            opacity: 0;
+            transform: translateX(100px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        .animate-slideInFromLeft {
+          opacity: 0;
+          transform: translateX(-100px);
+          transition: all 1s ease-out;
+        }
+        .animate-slideInFromRight {
+          opacity: 0;
+          transform: translateX(100px);
+          transition: all 1s ease-out;
+        }
+        .animate-slideInFromLeft.visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        .animate-slideInFromRight.visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      `}</style>
+      <section className="py-20 relative" style={{ backgroundColor: '#F3F3F3' }}>
+      {/* Background Pattern */}
+      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-20 w-80 h-80 opacity-80">
+        <img src="/assets/service2_pattern.svg" alt="Service Pattern 2" className="w-full h-full object-contain" />
       </div>
       
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
         {/* Three Content Blocks */}
         <div className="space-y-20">
           {/* Block 1: Phone Left, Content Right */}
-          <div className="flex items-center gap-20">
+          <div ref={block1Ref} data-block="block1" className="flex items-center gap-20">
             {/* Mobile App Mockup */}
             <div className="w-2/5 flex justify-center">
               <img
                 src={slides[0].phoneImage}
                 alt="Mobile App Mockup"
-                className="w-96 h-[500px] object-contain"
+                className={`w-96 h-[500px] object-contain animate-float animate-slideInFromLeft ${visibleElements.block1 ? 'visible' : ''}`}
                 onError={(e) => {
                   console.log('Image failed to load:', slides[0].phoneImage);
                   e.currentTarget.src = '/assets/phone1.png'; // Fallback
@@ -69,7 +147,7 @@ export default function ProductsContentSection() {
             </div>
 
             {/* Content Card */}
-            <div className="w-3/5">
+            <div className={`w-3/5 animate-slideInFromRight ${visibleElements.block1 ? 'visible' : ''}`}>
               <div className="bg-white rounded-2xl p-8 shadow-lg">
                 {/* Section Header */}
                 <div className="flex items-center space-x-3 mb-6">
@@ -107,33 +185,14 @@ export default function ProductsContentSection() {
                   </button>
                 </div>
 
-                {/* Navigation Arrows */}
-                <div className="flex justify-end space-x-2">
-                  <button
-                    onClick={prevSlide}
-                    className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors duration-200"
-                  >
-                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors duration-200"
-                  >
-                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
               </div>
             </div>
           </div>
 
           {/* Block 2: Content Left, Phone Right */}
-          <div className="flex items-center gap-20">
+          <div ref={block2Ref} data-block="block2" className="flex items-center gap-20">
             {/* Content Card */}
-            <div className="w-3/5">
+            <div className={`w-3/5 animate-slideInFromLeft ${visibleElements.block2 ? 'visible' : ''}`}>
               <div className="bg-white rounded-2xl p-8 shadow-lg">
                 {/* Section Header */}
                 <div className="flex items-center space-x-3 mb-6">
@@ -171,25 +230,6 @@ export default function ProductsContentSection() {
                   </button>
                 </div>
 
-                {/* Navigation Arrows */}
-                <div className="flex justify-end space-x-2">
-                  <button
-                    onClick={prevSlide}
-                    className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors duration-200"
-                  >
-                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors duration-200"
-                  >
-                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
               </div>
             </div>
 
@@ -198,7 +238,7 @@ export default function ProductsContentSection() {
               <img
                 src={slides[1].phoneImage}
                 alt="Mobile App Mockup"
-                className="w-96 h-[500px] object-contain"
+                className={`w-96 h-[500px] object-contain animate-float animate-slideInFromRight ${visibleElements.block2 ? 'visible' : ''}`}
                 onError={(e) => {
                   console.log('Image failed to load:', slides[1].phoneImage);
                   e.currentTarget.src = '/assets/phone1.png'; // Fallback
@@ -208,13 +248,13 @@ export default function ProductsContentSection() {
           </div>
 
           {/* Block 3: Phone Left, Content Right */}
-          <div className="flex items-center gap-20">
+          <div ref={block3Ref} data-block="block3" className="flex items-center gap-20">
             {/* Mobile App Mockup */}
             <div className="w-2/5 flex justify-center">
               <img
                 src={slides[2].phoneImage}
                 alt="Mobile App Mockup"
-                className="w-[450px] h-[600px] object-contain"
+                className={`w-[450px] h-[600px] object-contain animate-float animate-slideInFromLeft ${visibleElements.block3 ? 'visible' : ''}`}
                 onError={(e) => {
                   console.log('Image failed to load:', slides[2].phoneImage);
                   e.currentTarget.src = '/assets/phone1.png'; // Fallback
@@ -223,7 +263,7 @@ export default function ProductsContentSection() {
             </div>
 
             {/* Content Card */}
-            <div className="w-3/5">
+            <div className={`w-3/5 animate-slideInFromRight ${visibleElements.block3 ? 'visible' : ''}`}>
               <div className="bg-white rounded-2xl p-8 shadow-lg">
                 {/* Section Header */}
                 <div className="flex items-center space-x-3 mb-6">
@@ -261,30 +301,12 @@ export default function ProductsContentSection() {
                   </button>
                 </div>
 
-                {/* Navigation Arrows */}
-                <div className="flex justify-end space-x-2">
-                  <button
-                    onClick={prevSlide}
-                    className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors duration-200"
-                  >
-                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors duration-200"
-                  >
-                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+    </>
   );
 }

@@ -1,5 +1,7 @@
 'use client';
 
+import { motion } from 'framer-motion';
+
 export default function ServicesHeroSection() {
   return (
     <section className="pt-32 pb-20 relative" style={{ backgroundColor: '#0B3A93' }}>
@@ -13,12 +15,17 @@ export default function ServicesHeroSection() {
           
           {/* Mixed font headline */}
           <div className="mb-8 text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            <motion.h1 
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+            >
               Innovation that{' '}
               <span className="font-script text-[#00ABB1] text-5xl md:text-6xl lg:text-7xl italic">defines trends</span>{' '}
               and designing{' '}
               <span className="font-script text-[#00ABB1] text-5xl md:text-6xl lg:text-7xl italic">high-impact</span>
-            </h1>
+            </motion.h1>
           </div>
         </div>
       </div>

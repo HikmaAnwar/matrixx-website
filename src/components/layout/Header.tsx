@@ -44,8 +44,13 @@ export default function Header() {
             </nav>
 
             {/* Arrow Button */}
-            <button className="w-10 h-10 bg-[#00ABB1] rounded-lg flex items-center justify-center hover:bg-[#0B3A93] transition-colors duration-200">
-              <img src="/assets/Explore More.svg" alt="Explore More" className="w-8 h-8" />
+            <button 
+              onClick={() => {
+                window.location.href = '/login';
+              }}
+              className="w-10 h-10 bg-[#00ABB1] rounded-lg flex items-center justify-center hover:bg-[#0B3A93] transition-colors duration-200"
+            >
+              <img src="/assets/Explore More.svg" alt="Admin Access" className="w-8 h-8" />
             </button>
             {/* Mobile menu button */}
             <button

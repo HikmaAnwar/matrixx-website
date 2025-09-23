@@ -8,47 +8,20 @@ import { HERO_CONTENT } from '@/lib/constants';
 // Lazy load Spline with better error handling
 const Spline = dynamic(() => import('@splinetool/react-spline'), {
   ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00ABB1] mx-auto mb-4"></div>
-        <div className="text-sm text-gray-600">Loading 3D Scene...</div>
-      </div>
-    </div>
-  ),
 });
 
 export default function mHeroSection() {
   const [showCard, setShowCard] = useState(false);
   const [splineLoaded, setSplineLoaded] = useState(false);
   const [splineError, setSplineError] = useState(false);
-  const [shouldLoadSpline, setShouldLoadSpline] = useState(false);
 
-  // Delay Spline loading to reduce initial resource pressure
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowCard(true);
     }, 2000);
 
-    // Delay Spline loading by 1 second to let other resources load first
-    const splineDelayTimer = setTimeout(() => {
-      setShouldLoadSpline(true);
-    }, 1000);
-
-    // Set a shorter timeout for Spline loading
-    const splineTimeout = setTimeout(() => {
-      if (!splineLoaded && shouldLoadSpline) {
-        console.warn('Spline scene loading timeout - showing fallback');
-        setSplineError(true);
-      }
-    }, 8000); // Reduced to 8 seconds
-
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(splineDelayTimer);
-      clearTimeout(splineTimeout);
-    };
-  }, [splineLoaded, shouldLoadSpline]);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSplineLoad = useCallback(() => {
     console.log('Spline scene loaded successfully');
@@ -154,7 +127,6 @@ export default function mHeroSection() {
                       onClick={() => {
                         setSplineError(false);
                         setSplineLoaded(false);
-                        setShouldLoadSpline(true);
                       }}
                       className="mt-4 px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors"
                     >
@@ -162,8 +134,8 @@ export default function mHeroSection() {
                     </button>
                   </div>
                 </div>
-              ) : shouldLoadSpline ? (
-                // Load Spline only when ready with scale transform and positioning
+              ) : (
+                // Load Spline with scale transform and positioning
                 <div className="w-full h-full transform scale-150 origin-top-right translate-x-32 lg:translate-x-64 -translate-y-8 lg:-translate-y-16">
                   <Spline
                     scene="https://prod.spline.design/E51XOAWnUdBbEzFZ/scene.splinecode"
@@ -171,14 +143,6 @@ export default function mHeroSection() {
                     onLoad={handleSplineLoad}
                     onError={handleSplineError}
                   />
-                </div>
-              ) : (
-                // Initial loading state
-                <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg">
-                  <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00ABB1] mx-auto mb-4"></div>
-                    <div className="text-sm text-gray-600">Preparing 3D Scene...</div>
-                  </div>
                 </div>
               )}
             </div>

@@ -1,24 +1,69 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import { HERO_CONTENT } from '@/lib/constants';
+
+// Lazy load Spline with better error handling
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00ABB1] mx-auto mb-4"></div>
+        <div className="text-sm text-gray-600">Loading 3D Scene...</div>
+      </div>
+    </div>
+  ),
+});
 
 export default function mHeroSection() {
   const [showCard, setShowCard] = useState(false);
+  const [splineLoaded, setSplineLoaded] = useState(false);
+  const [splineError, setSplineError] = useState(false);
+  const [shouldLoadSpline, setShouldLoadSpline] = useState(false);
 
+  // Delay Spline loading to reduce initial resource pressure
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowCard(true);
-    }, 2000); // Show card after 2 seconds
+    }, 2000);
 
-    return () => clearTimeout(timer);
+    // Delay Spline loading by 1 second to let other resources load first
+    const splineDelayTimer = setTimeout(() => {
+      setShouldLoadSpline(true);
+    }, 1000);
+
+    // Set a shorter timeout for Spline loading
+    const splineTimeout = setTimeout(() => {
+      if (!splineLoaded && shouldLoadSpline) {
+        console.warn('Spline scene loading timeout - showing fallback');
+        setSplineError(true);
+      }
+    }, 8000); // Reduced to 8 seconds
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(splineDelayTimer);
+      clearTimeout(splineTimeout);
+    };
+  }, [splineLoaded, shouldLoadSpline]);
+
+  const handleSplineLoad = useCallback(() => {
+    console.log('Spline scene loaded successfully');
+    setSplineLoaded(true);
+  }, []);
+
+  const handleSplineError = useCallback((error: any) => {
+    console.error('Spline error:', error);
+    setSplineError(true);
   }, []);
   return (
-    <section className="relative min-h-screen bg-[#F3F3F3] overflow-hidden mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <section className="relative h-screen bg-[#F3F3F3] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 h-full flex flex-col justify-center">
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-16 items-end">
           {/* Left Content */}
           <div className="space-y-8">
             {/* Main Heading */}
@@ -90,51 +135,89 @@ export default function mHeroSection() {
             </div>
           </div>
 
-          {/* Right Content - Hero Section Image */}
+          {/* Right Content - Hero Section Spline */}
           <div className="relative">
-            <div className="relative w-full h-96 lg:h-[500px]">
-              <img 
-                src="/assets/herosection_image.svg" 
-                alt="Hero Section" 
-                className="w-full h-full object-contain"
-              />
-              
-              {/* Cards Section - Overlapping */}
-              <div className={`absolute -bottom-16 left-0 right-0 bg-white rounded-2xl shadow-lg mx-4 overflow-hidden transition-all duration-1000 ease-out ${
-                showCard 
-                  ? 'opacity-100 transform translate-y-0 animate-slow-bounce' 
-                  : 'opacity-0 transform translate-y-8'
-              }`}>
-                <div className="grid lg:grid-cols-2 gap-0">
-                  {/* Left Section - Our Latest Product */}
-                  <div className="p-3">
-                    <h3 className="text-xl font-bold text-[#464646] mb-4">
-                      Our Latest{' '}
-                      <span className="font-script text-[#00ABB1]">Product</span>
-                    </h3>
-                    <p className="text-gray-600 mb-3 leading-relaxed">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <div className="flex items-center space-x-3">
-                      <span className="text-gray-700 font-medium">View Product</span>
-                      <button className="w-10 h-10 bg-[#0B3A93] rounded-lg flex items-center justify-center hover:bg-[#00ABB1] transition-colors duration-200">
-                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
+            {/* 3D Animation Container - Full visibility */}
+            <div className="relative w-full h-[600px] lg:h-[700px] overflow-visible flex justify-end items-start mr-8 lg:mr-16">
+              {splineError ? (
+                // Fallback when Spline fails to load
+                <div className="w-full h-full bg-gradient-to-br from-[#00ABB1] to-[#0B3A93] rounded-lg flex items-center justify-center">
+                  <div className="text-center text-white">
+                    <div className="w-32 h-32 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
+                      <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
                     </div>
+                    <h3 className="text-xl font-bold mb-2">3D Animation</h3>
+                    <p className="text-sm opacity-80">Interactive Experience</p>
+                    <button 
+                      onClick={() => {
+                        setSplineError(false);
+                        setSplineLoaded(false);
+                        setShouldLoadSpline(true);
+                      }}
+                      className="mt-4 px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors"
+                    >
+                      Retry Loading
+                    </button>
                   </div>
+                </div>
+              ) : shouldLoadSpline ? (
+                // Load Spline only when ready with scale transform and positioning
+                <div className="w-full h-full transform scale-150 origin-top-right translate-x-32 lg:translate-x-64 -translate-y-8 lg:-translate-y-16">
+                  <Spline
+                    scene="https://prod.spline.design/E51XOAWnUdBbEzFZ/scene.splinecode"
+                    className="w-full h-full"
+                    onLoad={handleSplineLoad}
+                    onError={handleSplineError}
+                  />
+                </div>
+              ) : (
+                // Initial loading state
+                <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00ABB1] mx-auto mb-4"></div>
+                    <div className="text-sm text-gray-600">Preparing 3D Scene...</div>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* Cards Section - Overlapping design */}
+            <div className={`absolute bottom-0 left-0 right-0 bg-white rounded-2xl shadow-lg mx-4 overflow-hidden transition-all duration-1000 ease-out ${
+              showCard 
+                ? 'opacity-100 transform translate-y-0 animate-slow-bounce' 
+                : 'opacity-0 transform translate-y-8'
+            }`}>
+              <div className="grid lg:grid-cols-2 gap-0">
+                {/* Left Section - Our Latest Product */}
+                <div className="p-4">
+                  <h3 className="text-lg font-bold text-[#464646] mb-2">
+                    Our Latest{' '}
+                    <span className="font-script text-[#00ABB1]">Product</span>
+                  </h3>
+                  <p className="text-gray-600 mb-3 leading-relaxed text-sm">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <span className="text-gray-700 font-medium text-sm">View Product</span>
+                    <button className="w-8 h-8 bg-[#0B3A93] rounded-lg flex items-center justify-center hover:bg-[#00ABB1] transition-colors duration-200">
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
 
-                  {/* Right Section - MPOS */}
-                  <div className="bg-white p-3 text-[#464646] relative">
-                    {/* Hero Slide Image */}
-                    <div className="relative p-2">
-                      <img 
-                        src="/assets/Hero Slide Image.png" 
-                        alt="MPOS Dashboard" 
-                        className="w-full h-auto object-contain"
-                      />
-                    </div>
+                {/* Right Section - MPOS */}
+                <div className="bg-white p-4 text-[#464646] relative">
+                  {/* Hero Slide Image */}
+                  <div className="relative">
+                    <img 
+                      src="/assets/Hero Slide Image.png" 
+                      alt="MPOS Dashboard" 
+                      className="w-full h-auto object-contain rounded-lg"
+                    />
                   </div>
                 </div>
               </div>
